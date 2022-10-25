@@ -8,7 +8,7 @@ const redirectServedPath = require('react-dev-utils/redirectServedPathMiddleware
 const paths = require('./paths');
 const getHttpsConfig = require('./getHttpsConfig');
 
-const menuData = require("../server/menu-data.json");
+const menuData = require('../server/menu-data.json');
 
 const host = process.env.HOST || '0.0.0.0';
 const sockHost = process.env.WDS_SOCKET_HOST;
@@ -109,7 +109,7 @@ module.exports = function (proxy, allowedHost) {
       // This lets us fetch source contents from webpack for the error overlay
       devServer.app.use(evalSourceMapMiddleware(devServer));
 
-      devServer.app.get("/api/menu", (req, res) => {
+      devServer.app.get('/api/menu', (req, res) => {
         res.send(menuData);
       });
 
