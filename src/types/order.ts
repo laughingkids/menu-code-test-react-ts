@@ -8,10 +8,6 @@ export type OrderItem = {
 
 export type OrderValidator = (dish: OrderItem, visitor: number) => OrderAlert;
 
-export type Order = {
-  [key in DishType]: OrderItem[];
-};
-
 export type OrderAlert = {
   canOrder: boolean;
 } & Alert;
