@@ -1,18 +1,19 @@
+import {Alert} from './alert';
 import {Dish, DishType} from './menu';
 
 export type OrderItem = {
   amount: number;
+  dishType: DishType;
 } & Dish;
 
-export type OrderValidator = (dish: OrderItem, visitor: number) => OrderMessage;
+export type OrderValidator = (dish: OrderItem, visitor: number) => OrderAlert;
 
 export type Order = {
   [key in DishType]: OrderItem[];
 };
 
-export type OrderMessage = {
+export type OrderAlert = {
   canOrder: boolean;
-  message?: string;
-};
+} & Alert;
 
 export type OrderOperations = 'add' | 'remove';

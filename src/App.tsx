@@ -5,6 +5,8 @@ import {MENU_ENDPOINT} from './config/constants';
 import {useFetch} from './hooks/use-fetch';
 import {StyledContainer} from './styles/common';
 import {Menu} from './types/menu';
+import {Provider} from 'react-redux';
+import {store} from './store';
 
 function App() {
   const [data, loading, error] = useFetch<Menu>(MENU_ENDPOINT);
@@ -13,11 +15,13 @@ function App() {
   }
   const {starters, mains, desserts} = data as Menu;
   return (
-    <StyledContainer className="App">
-      <MenuList type={'starters'} dishes={starters} />
-      <MenuList type={'mains'} dishes={mains} />
-      <MenuList type={'desserts'} dishes={desserts} />
-    </StyledContainer>
+    <Provider store={store}>
+      <StyledContainer className="App">
+        <MenuList type={'starters'} dishes={starters} />
+        <MenuList type={'mains'} dishes={mains} />
+        <MenuList type={'desserts'} dishes={desserts} />
+      </StyledContainer>
+    </Provider>
   );
 }
 

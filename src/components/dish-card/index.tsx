@@ -6,8 +6,6 @@ import {DishCardWrapper, DishCardImg, DishLabel} from './styled';
 
 type DishCardProps = {
   type: DishType;
-  onAmountChange?: () => void;
-  amount?: number;
 } & Dish;
 
 export const DishCard: React.FC<DishCardProps> = ({
@@ -22,7 +20,7 @@ export const DishCard: React.FC<DishCardProps> = ({
         <DishLabel>{name}</DishLabel>
         <DishLabel>Price: {currencyConverter(price)}</DishLabel>
       </DishCardImg>
-      <OrderOperator dishId={id} type={type} />
+      <OrderOperator dish={{id, name, price}} type={type} />
     </DishCardWrapper>
   );
 };
