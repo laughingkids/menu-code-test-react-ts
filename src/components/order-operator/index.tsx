@@ -16,9 +16,13 @@ const OrderOperator: React.FC<OrderOperator> = ({
   return (
     <>
       <OrderOperatorWrapper>
-        <OrderButton onClick={() => onAmountChange('add')}>+</OrderButton>
+        <OrderButton type="button" onClick={() => onAmountChange('add')}>
+          +
+        </OrderButton>
         <p>{amount}</p>
-        <OrderButton onClick={() => onAmountChange('remove')}>-</OrderButton>
+        <OrderButton type="button" onClick={() => onAmountChange('remove')}>
+          -
+        </OrderButton>
       </OrderOperatorWrapper>
       {message && <p>{message.message}</p>}
     </>
