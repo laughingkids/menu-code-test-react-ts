@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 
-export function useFetch<T>(url: string, options?: any) {
+export function useFetch<T>(url: string, options?: never) {
   const [data, setData] = useState<T>({} as T);
   const [error, setError] = useState<string>('');
   const [loading, setLoading] = useState<boolean>(false);
@@ -12,7 +12,7 @@ export function useFetch<T>(url: string, options?: any) {
         if (!response.ok) {
           const msg = getErrorMsg(response.status);
           setError(msg);
-          console.error(`fetch error ${msg} - ${url}`)
+          console.error(`fetch error ${msg} - ${url}`);
           return;
         }
         return response.json();
@@ -27,15 +27,15 @@ export function useFetch<T>(url: string, options?: any) {
   return [data, error, loading] as const;
 }
 
-function getErrorMsg(status:number) {
-  switch(status) {
-      case 500:
-          return  '500_INTERNAL_ERROR';
-      case 404:
-          return  '404_PAGE_NOT_FOUND';
-      case 401:
-          return  '401_AUTH_FAILED';
-      default:
-          return `${status}_UNKNOWN_ISSUE`;
+function getErrorMsg(status: number) {
+  switch (status) {
+    case 500:
+      return '500_INTERNAL_ERROR';
+    case 404:
+      return '404_PAGE_NOT_FOUND';
+    case 401:
+      return '401_AUTH_FAILED';
+    default:
+      return `${status}_UNKNOWN_ISSUE`;
   }
 }

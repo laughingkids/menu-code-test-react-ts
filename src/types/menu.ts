@@ -5,9 +5,9 @@ type Dish = {
 };
 
 type Menu = {
-  starters: Dish[];
-  mains: Dish[];
-  desserts: Dish[];
+  [key in DishType]: Dish[];
 };
 
-export type {Dish, Menu};
+type DishType = 'starters' | 'mains' | 'desserts';
+
+export type {Dish, Menu, DishType};
