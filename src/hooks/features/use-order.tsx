@@ -1,7 +1,8 @@
-import {addDish, removeDish, setOrderMessage} from '../store/order/slice';
-import {Dish, DishType} from '../types/menu';
-import {OrderItem, OrderAlert, OrderOperations} from '../types/order';
-import {useAppDispatch, useAppSelector} from './use-redux';
+import {addDish, removeDish, setOrderMessage} from '../../store/order/slice';
+import {Dish, DishType} from '../../types/menu';
+import {OrderItem, OrderAlert, OrderOperations} from '../../types/order';
+import {MIN_COURSE_PER_PERSON} from './use-people';
+import {useAppDispatch, useAppSelector} from '../common/use-redux';
 
 const getTotalCourse = (orderItems: OrderItem[]): number => {
   return orderItems.reduce((sum, item) => sum + item.amount, 0);
@@ -11,7 +12,6 @@ const getMainCourses = (orderItems: OrderItem[]): number => {
     .filter(item => item.dishType === 'mains')
     .reduce((sum, item) => sum + item.amount, 0);
 };
-const MIN_COURSE_PER_PERSON = 2;
 function orderValidator(
   dish: Dish,
   operation: OrderOperations,
@@ -54,18 +54,22 @@ function orderValidator(
       message: 'Either prawn cocktail or salmon fillet',
     };
   }
-  const minCourseAmount = MIN_COURSE_PER_PERSON * people;
-  if (getTotalCourse(orderItems) < minCourseAmount) {
-    return {
-      ...alert,
-      message: `At least order ${minCourseAmount} courses for ${people} people`,
-    };
-  }
-  if (getMainCourses(orderItems) < people) {
-    return {
-      ...alert,
-      message: `At least order ${people} main courses for ${people} people`,
-    };
+  if (!alert.canOrder) {
+    return alert;
+  } else {
+    const minCourseAmount = MIN_COURSE_PER_PERSON * people;
+    if (getTotalCourse(orderItems) < minCourseAmount) {
+      return {
+        ...alert,
+        message: `At least order ${minCourseAmount} courses for ${people} people`,
+      };
+    }
+    if (getMainCourses(orderItems) < people) {
+      return {
+        ...alert,
+        message: `At least order ${people} main courses for ${people} people`,
+      };
+    }
   }
   return alert;
 }

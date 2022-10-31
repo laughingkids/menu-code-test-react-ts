@@ -1,4 +1,4 @@
-import {useAppSelector} from '../../hooks/use-redux';
+import {useAppSelector} from '../../hooks/common/use-redux';
 import {DishType} from '../../types/menu';
 import {OrderItem} from '../../types/order';
 import {currencyConverter} from '../../utilities/currency-helpers';

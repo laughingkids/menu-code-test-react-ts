@@ -1,6 +1,6 @@
 import styled from '@emotion/styled';
 import * as React from 'react';
-import {constants} from '../../styles/constants';
+import {constants} from '../../../styles/constants';
 import {Footer} from './footer';
 import {Header} from './header';
 import {Sidebar} from './sidebar';

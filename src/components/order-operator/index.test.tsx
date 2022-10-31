@@ -1,25 +1,33 @@
 import {render, screen} from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import {useOrder} from '../../hooks/use-order';
 import {Dish} from '../../types/menu';
 import OrderOperator from './index';
-
-jest.mock('../../hooks/use-order');
-const mockUseOrder = useOrder as jest.MockedFunction<typeof useOrder>;
 
 describe('test currency helper functions', () => {
   it('operator callback been called as expected', async () => {
     const testCallback = jest.fn();
-    mockUseOrder.mockReturnValue([5, testCallback]);
-    render(<OrderOperator dish={{} as Dish} type="starters" />);
+    render(
+      <OrderOperator
+        dish={{} as Dish}
+        type="starters"
+        amount={5}
+        onOperatorClick={testCallback}
+      />
+    );
     await userEvent.click(screen.getByText('+'));
     await userEvent.click(screen.getByText('-'));
     expect(testCallback).toBeCalledTimes(2);
   });
   it('operator callback been called as expected', async () => {
     const testCallback = jest.fn();
-    mockUseOrder.mockReturnValue([5, testCallback]);
-    render(<OrderOperator dish={{} as Dish} type="starters" />);
+    render(
+      <OrderOperator
+        dish={{} as Dish}
+        type="starters"
+        amount={5}
+        onOperatorClick={testCallback}
+      />
+    );
     expect(screen.getByText('5')).not.toBeNull();
   });
 });

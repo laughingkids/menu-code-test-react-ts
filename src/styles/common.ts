@@ -5,6 +5,7 @@ import {constants} from './constants';
 export const StyledContainer = styled.div`
   width: calc(100% - ${constants.sidebarWidth});
   margin: auto;
+  position: relative;
 `;
 
 export const FlexBox = css`

@@ -80,7 +80,7 @@ const orderSlice = createSlice({
     ) => {
       reduxLogger(payload, type);
       const {orderMsg} = payload;
-      return {...state, orderMsg};
+      return {...state, message: orderMsg};
     },
   },
 });

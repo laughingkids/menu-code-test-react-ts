@@ -14,7 +14,7 @@ const MenuList: React.FC<MenuListProps> = ({dishes, type}: MenuListProps) => {
       <h2>{type}</h2>
       <MenuListWrapper>
         {dishes?.map(dish => (
-          <DishCard {...dish} type={type} />
+          <DishCard key={dish.name} {...dish} type={type} />
         ))}
       </MenuListWrapper>
     </>
