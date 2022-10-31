@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {useOrder} from '../../hooks/use-order';
 import {Dish, DishType} from '../../types/menu';
 import {currencyConverter} from '../../utilities/currency-helpers';
 import OrderOperator from '../order-operator';
@@ -9,18 +10,18 @@ type DishCardProps = {
 } & Dish;
 
 export const DishCard: React.FC<DishCardProps> = ({
-  id,
-  name,
-  price,
   type,
+  ...dish
 }: DishCardProps) => {
+  const {id, name, price} = dish;
+  const [amount, onAmountChange] = useOrder(dish, type);
   return (
     <DishCardWrapper key={`${name}-${id}`}>
-      <DishCardImg>
+      <DishCardImg role="button" onClick={() => onAmountChange('add')}>
         <DishLabel>{name}</DishLabel>
         <DishLabel>Price: {currencyConverter(price)}</DishLabel>
       </DishCardImg>
-      <OrderOperator dish={{id, name, price}} type={type} />
+      <OrderOperator dish={dish} type={type} />
     </DishCardWrapper>
   );
 };

@@ -1,8 +1,9 @@
 import {css} from '@emotion/react';
 import styled from '@emotion/styled';
+import {constants} from './constants';
 
 export const StyledContainer = styled.div`
-  width: 1200px;
+  width: calc(100% - ${constants.sidebarWidth});
   margin: auto;
 `;
 

@@ -30,6 +30,9 @@ const ReceiptItemList = ({
 export function Receipt(): JSX.Element {
   const {totalBill, orderItems} = useAppSelector(state => state.order);
   const types: DishType[] = ['starters', 'mains', 'desserts'];
+  if (!orderItems.length) {
+    return <></>;
+  }
   return (
     <div>
       <p>Receipt</p>
@@ -39,7 +42,7 @@ export function Receipt(): JSX.Element {
         );
         return <ReceiptItemList type={type} orderedItems={itemsUnderType} />;
       })}
-      <p>Total {totalBill}</p>
+      <p>Total {currencyConverter(totalBill)}</p>
     </div>
   );
 }
